@@ -9,7 +9,34 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "7da9440f-30cf-4c31-b212-1d058ab4758b",
-                    "expectedControlType": "Analog",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "98df2fe7-02e8-4899-a33e-7c2a977714af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "3b967a98-075b-415e-8532-afaa5471763e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Possess",
+                    "type": "Button",
+                    "id": "6bbdb552-1233-418f-957a-1123b29ecd14",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -17,9 +44,42 @@
             ],
             "bindings": [
                 {
+                    "name": "",
+                    "id": "185971df-c8fe-4b1e-a602-7f67958c46f4",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ec500ce-3edd-4b9a-b176-4939ac6b7789",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Possess",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6a99245-2837-4050-86ff-d41bdcd20d84",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
                     "name": "Arrow Keys",
-                    "id": "c0833106-64d5-4964-931b-9ea1726d6ceb",
-                    "path": "1DAxis",
+                    "id": "52f0a287-7a7f-45e0-9c01-f7ed9fdb3a58",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -28,8 +88,30 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "dd14ecb2-b8a6-4ccd-a0de-977a2e76e7fe",
+                    "name": "up",
+                    "id": "8383a0df-8aa8-4b9b-9b79-a46ffb95b2fa",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "144776f5-923a-4be9-8e58-4c66fa67d503",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard & Mouse",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "3712c51b-d912-4d8f-b2f9-e87e0972fb0d",
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
@@ -39,8 +121,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "58e610f9-7e53-47f5-8c50-4e9ecf2f026a",
+                    "name": "right",
+                    "id": "ae8ad581-142a-454f-b962-242865057458",
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
