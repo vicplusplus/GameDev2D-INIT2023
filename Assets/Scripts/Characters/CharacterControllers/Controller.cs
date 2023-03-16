@@ -1,8 +1,14 @@
-public abstract class Controller : Controls.IInGameActions 
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+[CreateAssetMenu(fileName = "Controller", menuName = "GameDev2D-INIT2023/Controller", order = 0)]
+public class Controller : ScriptableObject, Controls.IInGameActions
 {
-    
+
     public Vector2 MoveDirection;
     public bool IsJumping;
+    public bool IsPossessing;
+    public bool IsInteracting;
     private Controls _controls;
 
     private void OnEnable()
@@ -17,13 +23,13 @@ public abstract class Controller : Controls.IInGameActions
 
     void Controls.IInGameActions.OnInteract(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        IsInteracting = context.ReadValueAsButton();
     }
 
     void Controls.IInGameActions.OnJump(InputAction.CallbackContext context)
     {
         IsJumping = context.ReadValueAsButton();
-    
+
     }
 
     void Controls.IInGameActions.OnMove(InputAction.CallbackContext context)
@@ -33,6 +39,9 @@ public abstract class Controller : Controls.IInGameActions
 
     void Controls.IInGameActions.OnPossess(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
+        if (context.started) {
+            IsPossessing = context.ReadValueAsButton();
+        }
+        
     }
 }
