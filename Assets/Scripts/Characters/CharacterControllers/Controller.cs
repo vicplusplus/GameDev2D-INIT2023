@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.InputSystem;
-
-public class PlayerController : MonoBehaviour, Controls.IInGameActions
+public abstract class Controller : Controls.IInGameActions 
 {
-    public CharacterMovement CurrentCharacter;
-
-    private Vector2 _move;
+    
+    public Vector2 MoveDirection;
+    public bool IsJumping;
     private Controls _controls;
 
     private void OnEnable()
@@ -27,19 +22,13 @@ public class PlayerController : MonoBehaviour, Controls.IInGameActions
 
     void Controls.IInGameActions.OnJump(InputAction.CallbackContext context)
     {
-        if (CurrentCharacter != null)
-        {
-            CurrentCharacter.IsJumping = context.ReadValueAsButton();
-        }
+        IsJumping = context.ReadValueAsButton();
+    
     }
 
     void Controls.IInGameActions.OnMove(InputAction.CallbackContext context)
     {
-        print("hi");
-        if (CurrentCharacter != null)
-        {
-            CurrentCharacter.MoveDirection = context.ReadValue<Vector2>();
-        }
+        MoveDirection = context.ReadValue<Vector2>();
     }
 
     void Controls.IInGameActions.OnPossess(InputAction.CallbackContext context)
