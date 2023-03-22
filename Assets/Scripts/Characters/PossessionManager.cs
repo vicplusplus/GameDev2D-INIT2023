@@ -11,7 +11,7 @@ public class PossessionManager : MonoBehaviour
         _possessionQueue = new Queue<Character>();
     }
 
-    private void OnPossess()
+    public void TryPossess()
     {
         Debug.Log("Possesing");
     }

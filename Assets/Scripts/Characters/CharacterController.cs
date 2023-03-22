@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour, Controls.IInGameActions
 {
-    public Character character;
+    public Character Character;
     private Vector2 _moveDirection;
     private bool _isJumping;
     private bool _isPossessing;
@@ -27,23 +27,23 @@ public class CharacterController : MonoBehaviour, Controls.IInGameActions
 
     void Controls.IInGameActions.OnInteract(InputAction.CallbackContext context)
     {
-        _isInteracting = context.ReadValueAsButton();
+        // = context.ReadValueAsButton();
     }
 
     void Controls.IInGameActions.OnJump(InputAction.CallbackContext context)
     {
-        _isJumping = context.ReadValueAsButton();
+        Character.Movement.IsJumping = context.ReadValueAsButton();
     }
 
     void Controls.IInGameActions.OnMove(InputAction.CallbackContext context)
     {
-        _moveDirection = context.ReadValue<Vector2>();
+        Character.Movement.MoveDirection = context.ReadValue<Vector2>();
     }
 
     void Controls.IInGameActions.OnPossess(InputAction.CallbackContext context)
     {
         if (context.started) {
-            _isPossessing = context.ReadValueAsButton();
+            Character.Possession.TryPossess();
         }
     }
 }
