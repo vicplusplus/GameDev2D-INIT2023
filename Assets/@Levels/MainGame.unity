@@ -440,8 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   JumpSpeed: 10
-  GroundCheckSize: {x: 0.75, y: 0.1}
-  GroundCheckYOffset: -0.5
+  GroundCheckDistance: 0.05
   GroundLayers:
     serializedVersion: 2
     m_Bits: 8
