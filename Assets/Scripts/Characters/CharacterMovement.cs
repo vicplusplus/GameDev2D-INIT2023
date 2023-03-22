@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D),typeof(Collider2D))]
 public class CharacterMovement : MonoBehaviour
 {
     [Header("Physical Properties")]
