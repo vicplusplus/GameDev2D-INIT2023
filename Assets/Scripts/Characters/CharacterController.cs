@@ -3,11 +3,19 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour, Controls.IInGameActions
 {
-    public Character Character;
+    public Character Character
+    {
+        get => _character;
+        set
+        {
+
+        }
+    }
     private Vector2 _moveDirection;
     private bool _isJumping;
     private bool _isPossessing;
     private bool _isInteracting;
+    private Character _character;
     private Controls _controls;
 
     private void OnEnable()
@@ -42,7 +50,8 @@ public class CharacterController : MonoBehaviour, Controls.IInGameActions
 
     void Controls.IInGameActions.OnPossess(InputAction.CallbackContext context)
     {
-        if (context.started) {
+        if (context.started)
+        {
             Character.Possession.Possess(this);
         }
     }

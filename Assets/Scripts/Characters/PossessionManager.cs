@@ -4,18 +4,37 @@ using System.Linq;
 
 public class PossessionManager : MonoBehaviour
 {
+    public LayerMask CharacterLayers;
+    [HideInInspector]public Rigidbody2D Body;
     private Queue<Character> _possessionQueue;
+    private BoxCollider2D _bodyCollider;
 
     private void Awake()
     {
-        _possessionQueue = new Queue<Character>();
+        _bodyCollider = GetComponent<BoxCollider2D>();
+        Body = GetComponent<Rigidbody2D>();
+
     }
 
     public void Possess(CharacterController callingController)
     {
-        if(_possessionQueue.Count() < 1) return;
+        Collider2D[] hits = Physics2D.OverlapBoxAll(
+        Body.position + _bodyCollider.offset,
+        _bodyCollider.size,
+        0,
+        CharacterLayers
+        );
+        Debug.Log(hits.Length);
 
-       callingController.Character = _possessionQueue.Dequeue();
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Character temp = hits[i].GetComponent<Character>();
+            if (temp != null && hits[i].gameObject != gameObject)
+            {
+                callingController.Character.Possession.Body.velocity = Vector2.zero;
+                callingController.Character = temp;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
