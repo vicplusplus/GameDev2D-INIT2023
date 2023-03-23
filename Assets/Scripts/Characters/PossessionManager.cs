@@ -11,14 +11,17 @@ public class PossessionManager : MonoBehaviour
         _possessionQueue = new Queue<Character>();
     }
 
-    public void TryPossess()
+    public void Possess(CharacterController callingController)
     {
-        Debug.Log("Possesing");
+        if(_possessionQueue.Count() < 1) return;
+
+       callingController.Character = _possessionQueue.Dequeue();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Character otherCharacter = GetComponent<Character>();
+        Character otherCharacter = other.GetComponent<Character>();
+        Debug.Log($"{other}");
 
         if (otherCharacter == null) return;
 
@@ -28,7 +31,8 @@ public class PossessionManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        Character otherCharacter = GetComponent<Character>();
+        Character otherCharacter = other.GetComponent<Character>();
+        Debug.Log($"{other}");
 
         if (otherCharacter == null) return;
 

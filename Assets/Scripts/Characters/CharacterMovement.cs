@@ -8,6 +8,7 @@ public class CharacterMovement : MonoBehaviour
     [Header("Physical Properties")]
     public float Speed;
     public float JumpSpeed;
+    public BoxCollider2D BodyCollider;
 
     [Header("Ground Check Parameters")]
     public float GroundCheckDistance;
@@ -17,12 +18,10 @@ public class CharacterMovement : MonoBehaviour
     [HideInInspector] public bool IsJumping;
     [SerializeField] private State _state;
     private Rigidbody2D _body;
-    private BoxCollider2D _collider;
 
     private void Awake()
     {
         _body = GetComponent<Rigidbody2D>();
-        _collider = GetComponent<BoxCollider2D>();
         _state = State.Falling;
     }
 
@@ -47,8 +46,8 @@ public class CharacterMovement : MonoBehaviour
                 break;
             case State.Falling:
                 var hit = Physics2D.BoxCast(
-                    _body.position + _collider.offset + ((_collider.size.y - GroundCheckDistance) / 2) * Vector2.down,
-                    new Vector2(_collider.size.x, GroundCheckDistance),
+                    _body.position + BodyCollider.offset + ((BodyCollider.size.y - GroundCheckDistance) / 2) * Vector2.down,
+                    new Vector2(BodyCollider.size.x, GroundCheckDistance),
                     0,
                     Vector2.down,
                     GroundCheckDistance,

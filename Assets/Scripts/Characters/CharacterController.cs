@@ -43,7 +43,7 @@ public class CharacterController : MonoBehaviour, Controls.IInGameActions
     void Controls.IInGameActions.OnPossess(InputAction.CallbackContext context)
     {
         if (context.started) {
-            Character.Possession.TryPossess();
+            Character.Possession.Possess(this);
         }
     }
 }
