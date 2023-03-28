@@ -2,56 +2,67 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-[RequireComponent(typeof(CharacterMovement))]
 public class PossessionManager : MonoBehaviour
 {
-    public Controller _controller;
-    private CharacterMovement _movement;
-    private bool IsPossessing
-    {
-        get { return _controller.IsPossessing; }
-        set { _controller.IsPossessing = value; }
-    }
-    private Queue<Controller> _controllerQueue;
-
+    public LayerMask CharacterLayers;
+    [HideInInspector]public Rigidbody2D Body;
+    private Queue<Character> _possessionQueue;
+    private BoxCollider2D _bodyCollider;
 
     private void Awake()
     {
-        _movement = GetComponent<CharacterMovement>();
-        _controllerQueue = new Queue<Controller>();
+        _bodyCollider = GetComponent<BoxCollider2D>();
+        Body = GetComponent<Rigidbody2D>();
+
     }
 
-    private void Update()
+    public void Possess(CharacterController callingController)
     {
-        _movement.MoveDirection = _controller.MoveDirection;
-        _movement.IsJumping = _controller.IsJumping;
-        if (IsPossessing) OnPossess();
+        Collider2D[] hits = Physics2D.OverlapBoxAll(
+        Body.position + _bodyCollider.offset,
+        _bodyCollider.size,
+        0,
+        CharacterLayers
+        );
+        Debug.Log(hits.Length);
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            Character temp = hits[i].GetComponent<Character>();
+            if (temp != null && hits[i].gameObject != gameObject)
+            {
+                callingController.Character.Possession.Body.velocity = Vector2.zero;
+                callingController.Character = temp;
+            }
+        }
     }
 
-    private void OnPossess()
-    {
-        Debug.Log("Possesing");
-        IsPossessing = false;
-
-    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        PossessionManager otherPossession = GetComponent<PossessionManager>();
+        Character otherCharacter = other.GetComponent<Character>();
+        Debug.Log($"{other}");
 
-        if (otherPossession == null) return;
+        if (otherCharacter == null) return;
 
-        _controllerQueue.Enqueue(otherPossession._controller);
-        Debug.Log("Got a Controller");
+        _possessionQueue.Enqueue(otherCharacter);
+        Debug.Log($"Added {otherCharacter} to {this} queue.");
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        PossessionManager otherPossession = GetComponent<PossessionManager>();
+        Character otherCharacter = other.GetComponent<Character>();
+        Debug.Log($"{other}");
 
-        if (otherPossession == null) return;
+        if (otherCharacter == null) return;
 
-        _controllerQueue = new Queue<Controller>(_controllerQueue.Where(x => x != _controller));
+        _possessionQueue = new Queue<Character>(_possessionQueue.Where(x => x != otherCharacter));
+        Debug.Log($"Removed {otherCharacter} from {this} queue.");
+    }
 
-        Debug.Log("Removed a Controller");
+    public enum State
+    {
+        Idle,
+        Confused,
+        Possessed
     }
 }
