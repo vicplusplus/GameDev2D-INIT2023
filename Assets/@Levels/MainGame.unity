@@ -304,7 +304,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6915923772355906228, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_Name
-      value: Red
+      value: Pretend this is a cat
       objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906237, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_RootOrder
