@@ -5,7 +5,7 @@ using System.Linq;
 public class PossessionManager : MonoBehaviour
 {
     public LayerMask CharacterLayers;
-    [HideInInspector]public Rigidbody2D Body;
+    private Rigidbody2D Body;
     private Queue<Character> _possessionQueue;
     private BoxCollider2D _bodyCollider;
 
@@ -13,7 +13,6 @@ public class PossessionManager : MonoBehaviour
     {
         _bodyCollider = GetComponent<BoxCollider2D>();
         Body = GetComponent<Rigidbody2D>();
-
     }
 
     public void Possess(CharacterController callingController)
@@ -24,14 +23,19 @@ public class PossessionManager : MonoBehaviour
         0,
         CharacterLayers
         );
-        Debug.Log(hits.Length);
 
         for (int i = 0; i < hits.Length; i++)
         {
             Character temp = hits[i].GetComponent<Character>();
             if (temp != null && hits[i].gameObject != gameObject)
             {
-                callingController.Character.Possession.Body.velocity = Vector2.zero;
+                CharacterMovement oldCharacterMovement = callingController.Character.Movement;
+                temp.Movement.MoveDirection = oldCharacterMovement.MoveDirection;
+                temp.Movement.IsJumping = oldCharacterMovement.IsJumping;
+
+                callingController.Character.Controller.enabled = true;
+                temp.Controller.enabled = false;
+
                 callingController.Character = temp;
             }
         }
