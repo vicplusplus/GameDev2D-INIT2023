@@ -16,8 +16,8 @@ public class CharacterMovement : MonoBehaviour
 
     [HideInInspector] public Vector2 MoveDirection;
     [HideInInspector] public bool IsJumping;
-    [SerializeField] private State _state;
     private Rigidbody2D _body;
+    private State _state;
 
     private void Awake()
     {

@@ -3,19 +3,11 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour, Controls.IInGameActions
 {
-    public Character Character
-    {
-        get => _character;
-        set
-        {
-
-        }
-    }
     private Vector2 _moveDirection;
     private bool _isJumping;
     private bool _isPossessing;
     private bool _isInteracting;
-    private Character _character;
+    public Character Character;
     private Controls _controls;
 
     private void OnEnable()
@@ -31,6 +23,11 @@ public class CharacterController : MonoBehaviour, Controls.IInGameActions
     private void OnDisable()
     {
         _controls.Disable();
+    }
+
+    private void Start()
+    {
+        if(Character != null) Character.Controller.enabled = false;
     }
 
     void Controls.IInGameActions.OnInteract(InputAction.CallbackContext context)
