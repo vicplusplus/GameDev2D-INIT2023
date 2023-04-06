@@ -32,7 +32,10 @@ public class CharacterController : MonoBehaviour, Controls.IInGameActions
 
     void Controls.IInGameActions.OnInteract(InputAction.CallbackContext context)
     {
-        // = context.ReadValueAsButton();
+        if(context.started)
+        {
+            Character.Interactions.ConsumeInteraction();
+        }
     }
 
     void Controls.IInGameActions.OnJump(InputAction.CallbackContext context)

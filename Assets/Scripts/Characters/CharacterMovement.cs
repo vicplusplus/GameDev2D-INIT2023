@@ -27,6 +27,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(_body.bodyType == RigidbodyType2D.Static) return;
+        
         _body.velocity = new(Speed * MoveDirection.x, _body.velocity.y);
 
         switch (_state)

@@ -1,12 +1,9 @@
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 public class PossessionManager : MonoBehaviour
 {
     public LayerMask CharacterLayers;
     private Rigidbody2D Body;
-    private Queue<Character> _possessionQueue;
     private BoxCollider2D _bodyCollider;
 
     private void Awake()
@@ -39,28 +36,6 @@ public class PossessionManager : MonoBehaviour
                 callingController.Character = temp;
             }
         }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Character otherCharacter = other.GetComponent<Character>();
-        Debug.Log($"{other}");
-
-        if (otherCharacter == null) return;
-
-        _possessionQueue.Enqueue(otherCharacter);
-        Debug.Log($"Added {otherCharacter} to {this} queue.");
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Character otherCharacter = other.GetComponent<Character>();
-        Debug.Log($"{other}");
-
-        if (otherCharacter == null) return;
-
-        _possessionQueue = new Queue<Character>(_possessionQueue.Where(x => x != otherCharacter));
-        Debug.Log($"Removed {otherCharacter} from {this} queue.");
     }
 
     public enum State
