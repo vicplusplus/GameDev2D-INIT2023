@@ -16,39 +16,39 @@ public class CharacterMovement : MonoBehaviour
 
     [HideInInspector] public Vector2 MoveDirection;
     [HideInInspector] public bool IsJumping;
-    private Rigidbody2D _body;
+    [HideInInspector] public Rigidbody2D Body;
     private State _state;
 
     private void Awake()
     {
-        _body = GetComponent<Rigidbody2D>();
+        Body = GetComponent<Rigidbody2D>();
         _state = State.Falling;
     }
 
     private void FixedUpdate()
     {
-        if(_body.bodyType == RigidbodyType2D.Static) return;
+        if(Body.bodyType == RigidbodyType2D.Static) return;
         
-        _body.velocity = new(Speed * MoveDirection.x, _body.velocity.y);
+        Body.velocity = new(Speed * MoveDirection.x, Body.velocity.y);
 
         switch (_state)
         {
             case State.Grounded:
                 if (IsJumping)
                 {
-                    _body.velocity = new(_body.velocity.x, JumpSpeed);
+                    Body.velocity = new(Body.velocity.x, JumpSpeed);
                     _state = State.Jumping;
                 }
                 break;
             case State.Jumping:
-                if (_body.velocity.y <= 0)
+                if (Body.velocity.y <= 0)
                 {
                     _state = State.Falling;
                 }
                 break;
             case State.Falling:
                 var hit = Physics2D.BoxCast(
-                    _body.position + BodyCollider.offset + ((BodyCollider.size.y - GroundCheckDistance) / 2) * Vector2.down,
+                    Body.position + BodyCollider.offset + ((BodyCollider.size.y - GroundCheckDistance) / 2) * Vector2.down,
                     new Vector2(BodyCollider.size.x, GroundCheckDistance),
                     0,
                     Vector2.down,
