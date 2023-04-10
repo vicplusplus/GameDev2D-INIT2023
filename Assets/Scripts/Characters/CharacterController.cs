@@ -3,10 +3,6 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour, Controls.IInGameActions
 {
-    private Vector2 _moveDirection;
-    private bool _isJumping;
-    private bool _isPossessing;
-    private bool _isInteracting;
     public Character Character;
     private Controls _controls;
 
