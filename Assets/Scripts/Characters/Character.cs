@@ -7,6 +7,7 @@ public class Character : MonoBehaviour
     [HideInInspector] public PossessionManager Possession;
     [HideInInspector] public IdleController Controller;
     [HideInInspector] public InteractionManager Interactions;
+    [HideInInspector] public SpriteRenderer Renderer;
 
     private void Awake()
     {
@@ -14,10 +15,6 @@ public class Character : MonoBehaviour
         Possession = GetComponent<PossessionManager>();
         Controller = GetComponent<IdleController>();
         Interactions = GetComponent<InteractionManager>();
-
-        if(Controller == null)
-        {
-            Debug.LogWarning($"{gameObject} does not contain an Idle Controller!");
-        }
+        Renderer = GetComponent<SpriteRenderer>();
     }
 }

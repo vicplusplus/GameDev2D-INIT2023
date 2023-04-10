@@ -3,10 +3,6 @@ using UnityEngine.InputSystem;
 
 public class CharacterController : MonoBehaviour, Controls.IInGameActions
 {
-    private Vector2 _moveDirection;
-    private bool _isJumping;
-    private bool _isPossessing;
-    private bool _isInteracting;
     public Character Character;
     private Controls _controls;
 
@@ -27,7 +23,11 @@ public class CharacterController : MonoBehaviour, Controls.IInGameActions
 
     private void Start()
     {
-        if(Character != null) Character.Controller.enabled = false;
+        if (Character != null)
+        {
+            Character.Controller.enabled = false;
+            Character.Renderer.material = Character.Possession.PossessedMaterial;
+        }
     }
 
     void Controls.IInGameActions.OnInteract(InputAction.CallbackContext context)

@@ -8,4 +8,10 @@ public abstract class IdleController : MonoBehaviour
     {
         movement = GetComponent<CharacterMovement>();
     }
+
+    private void OnEnable()
+    {
+        movement.MoveDirection = Vector2.zero;
+        movement.IsJumping = false;
+    }
 }
