@@ -159,6 +159,7 @@ MonoBehaviour:
     m_Bits: 8
   MoveDirection: {x: 0, y: 0}
   IsJumping: 0
+  Body: {fileID: 0}
 --- !u!114 &6915923772355906230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,6 +175,8 @@ MonoBehaviour:
   CharacterLayers:
     serializedVersion: 2
     m_Bits: 64
+  PossessedMaterial: {fileID: 2100000, guid: 57178a4819b7e9c48ab624b89cf3f76e, type: 2}
+  DefaultMaterial: {fileID: 2100000, guid: 7fffc0d429154174cb78d806156b8cc0, type: 2}
 --- !u!114 &6915923772355906231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +193,7 @@ MonoBehaviour:
   Possession: {fileID: 0}
   Controller: {fileID: 0}
   Interactions: {fileID: 0}
+  Renderer: {fileID: 0}
 --- !u!114 &160711093442011059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d5a51ecd3962204d8f6b997072a6def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gravestone: {fileID: 0}
 --- !u!114 &6072096804439950876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,4 +222,3 @@ MonoBehaviour:
   detectionLayer:
     serializedVersion: 2
     m_Bits: 128
-  IsInteracting: 0

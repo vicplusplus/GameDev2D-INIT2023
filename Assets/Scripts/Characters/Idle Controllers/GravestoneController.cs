@@ -1,1 +1,7 @@
-﻿public class GravestoneController : IdleController { }
+﻿public class GravestoneController : IdleController
+{
+    private void OnEnable()
+    {
+        Destroy(gameObject);
+    }
+}
