@@ -26,8 +26,7 @@ public class InteractionManager : MonoBehaviour
         if(_interactionQueue.Count == 0) return;
 
         Interaction interaction = _interactionQueue.Dequeue();
-
-        Debug.Log(interaction.name);
+        interaction.Enact(_character);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -49,12 +48,5 @@ public class InteractionManager : MonoBehaviour
         if (interaction == null) return;
 
         _interactionQueue = new Queue<Interaction>(_interactionQueue.Where(x => x != interaction));
-    }
-
-    bool DetectObject()
-    {
-        return Physics2D.OverlapBox(transform.position,
-                                    _collider.size,
-                                    detectionLayer);
     }
 }
