@@ -1,22 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace Assets.Scripts.Interactions
+public class BoxPileInteraction : Interaction
 {
-    internal class BoxPileInteraction : Interaction
-    {
-        public override void Enact(Character callingCharacter)
-        {
-            print("ZAMN");
-        }
+    public Vector2 holdOffset;
+    public float holdScale;
 
-        public override bool Verify(Character callingCharacter)
+    private Transform _originalParent;
+    private float _dropHeight;
+
+    public void Awake()
+    {
+        _originalParent = transform.parent;
+        _dropHeight = transform.position.y;
+    }
+
+    public override void Enact(Character callingCharacter)
+    {
+        if(transform.parent == callingCharacter.transform)
         {
-            return callingCharacter.Controller.GetType() == typeof(RoadWorkerController);
+            transform.position = new Vector2(transform.parent.position.x, _dropHeight);
+            transform.SetParent(_originalParent);
+            transform.localScale = Vector3.one;
         }
+        else
+        {
+            transform.SetParent(callingCharacter.transform);
+            transform.position = transform.parent.position;
+            transform.localScale = Vector3.one * holdScale;
+        }
+    }
+
+    public override bool Verify(Character callingCharacter)
+    {
+        return callingCharacter.Controller.GetType() == typeof(RoadWorkerController);
     }
 }

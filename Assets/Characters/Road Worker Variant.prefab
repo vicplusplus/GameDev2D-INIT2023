@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6072096804439950876, guid: 255523746d64a6541863653ac754529c, type: 3}
+      propertyPath: InteractionLayers.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906224, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 1.125
@@ -14,6 +18,14 @@ PrefabInstance:
     - target: {fileID: 6915923772355906224, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 1.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 6915923772355906225, guid: 255523746d64a6541863653ac754529c, type: 3}
+      propertyPath: Speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6915923772355906225, guid: 255523746d64a6541863653ac754529c, type: 3}
+      propertyPath: JumpSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906226, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_Sprite
@@ -45,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906237, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906237, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906237, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6915923772355906237, guid: 255523746d64a6541863653ac754529c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
