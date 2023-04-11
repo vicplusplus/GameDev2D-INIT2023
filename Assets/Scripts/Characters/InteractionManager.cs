@@ -5,56 +5,38 @@ using System.Linq;
 public class InteractionManager : MonoBehaviour
 {
     // Detection Layer 
-    public LayerMask detectionLayer;
-    private BoxCollider2D _collider;
+    public LayerMask InteractionLayers;
+    private BoxCollider2D _bodyCollider;
     private Character _character;
-    private Queue<Interaction> _interactionQueue;
+    private Rigidbody2D _body;
 
     void Awake()
     {
         _character = GetComponent<Character>();
-        _collider = GetComponent<BoxCollider2D>();
+        _bodyCollider = GetComponent<BoxCollider2D>();
+        _body = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
+    public void Interact()
     {
-        _interactionQueue = new();
-    }
+        Collider2D[] hits = Physics2D.OverlapBoxAll(
+        _body.position + _bodyCollider.offset,
+        _bodyCollider.size,
+        0,
+        InteractionLayers
+        );
 
-    public void ConsumeInteraction()
-    {
-        if(_interactionQueue.Count == 0) return;
-
-        Interaction interaction = _interactionQueue.Dequeue();
-
-        Debug.Log(interaction.name);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        Interaction interaction = other.GetComponent<Interaction>();
-
-        if (interaction == null) return;
-
-        if(interaction.Verify(_character))
+        for (int i = 0; i < hits.Length; i++)
         {
-            _interactionQueue.Enqueue(interaction);
+            Interaction interaction = hits[i].GetComponent<Interaction>();
+            
+            if(interaction == null) continue;
+
+            if(interaction.Verify(_character))
+            {
+                interaction.Enact(_character);
+                return;
+            }
         }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Interaction interaction = other.GetComponent<Interaction>();
-
-        if (interaction == null) return;
-
-        _interactionQueue = new Queue<Interaction>(_interactionQueue.Where(x => x != interaction));
-    }
-
-    bool DetectObject()
-    {
-        return Physics2D.OverlapBox(transform.position,
-                                    _collider.size,
-                                    detectionLayer);
     }
 }

@@ -15,7 +15,7 @@ public class PossessionManager : MonoBehaviour
         _body = GetComponent<Rigidbody2D>();
     }
 
-    public void Possess(CharacterController callingController)
+    public void Possess(PlayerController callingController)
     {
         Collider2D[] hits = Physics2D.OverlapBoxAll(
         _body.position + _bodyCollider.offset,
