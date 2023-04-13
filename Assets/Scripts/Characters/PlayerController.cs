@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour, Controls.IInGameActions
     {
         if(context.started)
         {
-            Character.Interactions.ConsumeInteraction();
+            Character.Interactions.Interact();
         }
     }
 
