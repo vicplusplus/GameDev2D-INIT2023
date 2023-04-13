@@ -601,7 +601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Controller: {fileID: 629160047}
-  NextSceneID: 0
+  NextSceneID: 2
 --- !u!4 &1380560888
 Transform:
   m_ObjectHideFlags: 0
